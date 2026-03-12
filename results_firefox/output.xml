@@ -1,0 +1,1498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.1 on win32)" generated="2026-02-22T18:08:44.318943" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\DELL\Desktop\rob1\tests">
+<suite id="s1-s1" name="Login test" source="C:\Users\DELL\Desktop\rob1\tests\Login_test.robot">
+<test id="s1-s1-t1" name="Login avec valid cridentiels" line="18">
+<kw name="Se connecter au site" owner="base_page" type="SETUP">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:44.839919" level="INFO">Opening browser 'firefox' to base url 'https://www.saucedemo.com/'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>firefox</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-02-22T18:08:44.839919" elapsed="9.905773"/>
+</kw>
+<arg>'${BROWSER}' == 'chrome'</arg>
+<arg>Open Browser</arg>
+<arg>${BASE_URL}</arg>
+<arg>chrome</arg>
+<arg>ELSE IF</arg>
+<arg>'${BROWSER}' == 'firefox'</arg>
+<arg>Open Browser</arg>
+<arg>${BASE_URL}</arg>
+<arg>firefox</arg>
+<arg>ELSE IF</arg>
+<arg>'${BROWSER}' == 'edge'</arg>
+<arg>Open Browser</arg>
+<arg>${BASE_URL}</arg>
+<arg>edge</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Navigateur non supporté : ${BROWSER}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-02-22T18:08:44.839919" elapsed="9.906262"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.746181" elapsed="0.007029"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${SELENIUM_TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.754208" elapsed="0.003124"/>
+</kw>
+<doc>Ouvre Amazon dans Chrome, Firefox ou Edge</doc>
+<status status="PASS" start="2026-02-22T18:08:44.838920" elapsed="9.918412"/>
+</kw>
+<kw name="Saisir username" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:54.766472" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.765474" elapsed="0.000998"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:54.766472" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.766472" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:54.818333" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.769193" elapsed="0.049140"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.019833" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.819333" elapsed="0.200500"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.029301" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.019833" elapsed="0.009468"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:08:55.030528" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.029301" elapsed="0.001227"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.029301" elapsed="0.001227"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:08:54.769193" elapsed="0.261335"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:54.769193" elapsed="0.261335"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.031578" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.768192" elapsed="0.263386"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>@{args}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.034389" elapsed="0.030628"/>
+</kw>
+<msg time="2026-02-22T18:08:55.066020" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.033438" elapsed="0.032582"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.067708" level="INFO">Succès à la tentative 1 pour : Wait Until Element Is Visible ["xpath=//input[@id='user-name']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.066413" elapsed="0.002300"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:08:55.068713" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.033438" elapsed="0.035275"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.069707" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.069707" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.070790" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:08:55.069707" elapsed="0.001083"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.032581" elapsed="0.038209"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.032581" elapsed="0.038209"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.031578" elapsed="0.039212"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.070790" elapsed="0.001015"/>
+</kw>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${Username_Field}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:08:54.764331" elapsed="0.307474"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.072787" level="INFO">Typing text 'standard_user' into text field 'xpath=//input[@id='user-name']'.</msg>
+<arg>${Username_Field}</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.071805" elapsed="0.098711"/>
+</kw>
+<arg>${Valid_Username}</arg>
+<status status="PASS" start="2026-02-22T18:08:54.762921" elapsed="0.407595"/>
+</kw>
+<kw name="Saisir mode de passe" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.172850" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.172850" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.173850" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.172850" elapsed="0.001000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.179956" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.173850" elapsed="0.006106"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.381594" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.180952" elapsed="0.200642"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.390818" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.381594" elapsed="0.009224"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:08:55.391819" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.390818" elapsed="0.001001"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.390818" elapsed="0.001001"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.173850" elapsed="0.217969"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.173850" elapsed="0.217969"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.391819" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.173850" elapsed="0.217969"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>@{args}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.394381" elapsed="0.033737"/>
+</kw>
+<msg time="2026-02-22T18:08:55.428118" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.391819" elapsed="0.036299"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.431121" level="INFO">Succès à la tentative 1 pour : Wait Until Element Is Visible ["xpath=//input[@id='password']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.429123" elapsed="0.001998"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:08:55.431121" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.391819" elapsed="0.039302"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.432118" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.432118" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.432118" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:08:55.432118" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.391819" elapsed="0.040299"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.391819" elapsed="0.040299"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.391819" elapsed="0.040299"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.432118" elapsed="0.000000"/>
+</kw>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${Passeword_Field}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.172642" elapsed="0.259476"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.432118" level="INFO">Typing text 'secret_sauce' into text field 'xpath=//input[@id='password']'.</msg>
+<arg>${Passeword_Field}</arg>
+<arg>${passeword}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.432118" elapsed="0.039322"/>
+</kw>
+<arg>${Valid_Password}</arg>
+<status status="PASS" start="2026-02-22T18:08:55.171515" elapsed="0.299925"/>
+</kw>
+<kw name="Cliquer sur le bouton Login" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.474436" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.473447" elapsed="0.000989"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.474436" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.474436" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.484092" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.474436" elapsed="0.009656"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.685389" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.485099" elapsed="0.200290"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.691777" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.685389" elapsed="0.006388"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:08:55.692780" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.692780" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.692780" elapsed="0.000000"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.474436" elapsed="0.219341"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.474436" elapsed="0.219341"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.693777" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.474436" elapsed="0.219341"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>@{args}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.696804" elapsed="0.019214"/>
+</kw>
+<msg time="2026-02-22T18:08:55.717024" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.695490" elapsed="0.021534"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.719019" level="INFO">Succès à la tentative 1 pour : Wait Until Element Is Visible ["xpath=//input[@id='login-button']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.717024" elapsed="0.001995"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:08:55.719019" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.695490" elapsed="0.024531"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.720021" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.720021" elapsed="0.000997"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.721018" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:08:55.720021" elapsed="0.000997"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.695445" elapsed="0.025573"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.693777" elapsed="0.027241"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.693777" elapsed="0.028273"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.722050" elapsed="0.000000"/>
+</kw>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${Btn_Login}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.472440" elapsed="0.249610"/>
+</kw>
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.725095" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.724050" elapsed="0.001045"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.725095" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.725095" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.735852" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.728192" elapsed="0.007660"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:08:55.935938" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.735852" elapsed="0.200086"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.943772" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.935938" elapsed="0.007834"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:08:55.944717" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.944717" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.944717" elapsed="0.001003"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.728192" elapsed="0.217528"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.727161" elapsed="0.218559"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:55.945720" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.727161" elapsed="0.218559"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:55.948303" level="INFO">Clicking button 'xpath=//input[@id='login-button']'.</msg>
+<arg>@{args}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.948303" elapsed="0.226595"/>
+</kw>
+<msg time="2026-02-22T18:08:56.174898" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.948025" elapsed="0.226873"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:08:56.179176" level="INFO">Succès à la tentative 1 pour : Click Button ["xpath=//input[@id='login-button']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.174898" elapsed="0.004278"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:08:56.179176" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:55.947023" elapsed="0.232153"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.180163" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.180809" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.181317" elapsed="0.000026"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:08:56.179176" elapsed="0.002356"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:55.947023" elapsed="0.234509"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:08:55.947023" elapsed="0.234509"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:55.945720" elapsed="0.235812"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.181532" elapsed="0.000000"/>
+</kw>
+<arg>Click Button</arg>
+<arg>${Btn_Login}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:08:55.723050" elapsed="0.459482"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:08:55.471440" elapsed="0.711092"/>
+</kw>
+<kw name="verifier l'affichage de titre Produits" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:56.195981" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.195981" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:08:56.198046" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.198046" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:56.219423" level="INFO">${compte1} = 138</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.200897" elapsed="0.018526"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:08:56.420872" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.219423" elapsed="0.201449"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:56.434945" level="INFO">${compte2} = 138</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.420872" elapsed="0.014073"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.000000"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:08:56.199896" elapsed="0.235049"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:56.199896" elapsed="0.235049"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.434945" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.199045" elapsed="0.235900"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:56.467933" level="INFO">Current page contains text 'Swag Labs'.</msg>
+<arg>@{args}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.032988"/>
+</kw>
+<msg time="2026-02-22T18:08:56.467933" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.032988"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:08:56.467933" level="INFO">Succès à la tentative 1 pour : Page Should Contain ['Swag Labs']</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.032988"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.032988"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.032988"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:08:56.434945" elapsed="0.032988"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:08:56.467933" elapsed="0.000000"/>
+</kw>
+<arg>Page Should Contain</arg>
+<arg>Swag Labs</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.195981" elapsed="0.271952"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:08:56.194825" elapsed="0.273108"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:08:56.552152" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.474206" elapsed="0.077946"/>
+</kw>
+<kw name="Fermer tout les navigateurs" owner="base_page" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-02-22T18:08:56.553153" elapsed="3.637809"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:08:56.553153" elapsed="3.637809"/>
+</kw>
+<doc>ce cas de test permet de se connecter au site avec
+un username et mot de passe valides</doc>
+<tag>login</tag>
+<status status="PASS" start="2026-02-22T18:08:44.837916" elapsed="15.353046"/>
+</test>
+<test id="s1-s1-t2" name=" Login avec invalid cridentiels" line="30">
+<kw name="Se connecter au site" owner="base_page" type="SETUP">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:00.195176" level="INFO">Opening browser 'firefox' to base url 'https://www.saucedemo.com/'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>firefox</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-02-22T18:09:00.195176" elapsed="10.527389"/>
+</kw>
+<arg>'${BROWSER}' == 'chrome'</arg>
+<arg>Open Browser</arg>
+<arg>${BASE_URL}</arg>
+<arg>chrome</arg>
+<arg>ELSE IF</arg>
+<arg>'${BROWSER}' == 'firefox'</arg>
+<arg>Open Browser</arg>
+<arg>${BASE_URL}</arg>
+<arg>firefox</arg>
+<arg>ELSE IF</arg>
+<arg>'${BROWSER}' == 'edge'</arg>
+<arg>Open Browser</arg>
+<arg>${BASE_URL}</arg>
+<arg>edge</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Navigateur non supporté : ${BROWSER}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-02-22T18:09:00.194174" elapsed="10.529007"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.723565" elapsed="0.018249"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${SELENIUM_TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.741814" elapsed="0.005001"/>
+</kw>
+<doc>Ouvre Amazon dans Chrome, Firefox ou Edge</doc>
+<status status="PASS" start="2026-02-22T18:09:00.194174" elapsed="10.552641"/>
+</kw>
+<kw name="Saisir username" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:10.753816" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.753816" elapsed="0.000713"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:10.754814" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.754814" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:10.798817" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.757815" elapsed="0.041002"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.000545" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.799836" elapsed="0.200709"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.010556" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.000545" elapsed="0.010011"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:09:11.011854" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.011854" elapsed="0.000702"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.011558" elapsed="0.000998"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:09:10.757815" elapsed="0.254741"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:10.757263" elapsed="0.255293"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.012556" elapsed="0.000999"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.756344" elapsed="0.257211"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>@{args}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.015675" elapsed="0.025932"/>
+</kw>
+<msg time="2026-02-22T18:09:11.042355" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.015560" elapsed="0.026996"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.044558" level="INFO">Succès à la tentative 1 pour : Wait Until Element Is Visible ["xpath=//input[@id='user-name']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.042556" elapsed="0.002002"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:09:11.044558" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.014559" elapsed="0.029999"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.044558" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.045754" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.045754" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:09:11.044558" elapsed="0.001196"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.014559" elapsed="0.031195"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.014559" elapsed="0.031195"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.013555" elapsed="0.032199"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.045754" elapsed="0.000803"/>
+</kw>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${Username_Field}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:09:10.751821" elapsed="0.294736"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.046557" level="INFO">Typing text '12' into text field 'xpath=//input[@id='user-name']'.</msg>
+<arg>${Username_Field}</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.046557" elapsed="0.063005"/>
+</kw>
+<arg>${Invalid_Username}</arg>
+<status status="PASS" start="2026-02-22T18:09:10.747814" elapsed="0.361748"/>
+</kw>
+<kw name="Saisir mode de passe" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.113555" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.112562" elapsed="0.000993"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.113555" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.113555" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.125556" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.116581" elapsed="0.008975"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.325815" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.125556" elapsed="0.200259"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.341655" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.325815" elapsed="0.015840"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:09:11.342318" elapsed="0.000336"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.341889" elapsed="0.000765"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.341889" elapsed="0.000765"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.116581" elapsed="0.226073"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.115557" elapsed="0.227097"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.343296" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.114582" elapsed="0.229071"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>@{args}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.345655" elapsed="0.054001"/>
+</kw>
+<msg time="2026-02-22T18:09:11.399656" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.344651" elapsed="0.055005"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.402655" level="INFO">Succès à la tentative 1 pour : Wait Until Element Is Visible ["xpath=//input[@id='password']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.400654" elapsed="0.002001"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:09:11.402655" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.344651" elapsed="0.058004"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.403652" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.403652" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.403652" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:09:11.402655" elapsed="0.001998"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.344651" elapsed="0.060002"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.344651" elapsed="0.060002"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.343653" elapsed="0.061000"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.404653" elapsed="0.000000"/>
+</kw>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${Passeword_Field}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.112562" elapsed="0.293090"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.406679" level="INFO">Typing text '244' into text field 'xpath=//input[@id='password']'.</msg>
+<arg>${Passeword_Field}</arg>
+<arg>${passeword}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.405652" elapsed="0.039103"/>
+</kw>
+<arg>${Invalid_Password}</arg>
+<status status="PASS" start="2026-02-22T18:09:11.110561" elapsed="0.334194"/>
+</kw>
+<kw name="Cliquer sur le bouton Login" owner="login_page">
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.451653" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.451653" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.452930" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.452653" elapsed="0.000277"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.465788" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.456222" elapsed="0.009566"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.666890" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.466652" elapsed="0.200238"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.672957" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.666890" elapsed="0.006067"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:09:11.673908" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.673908" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.673908" elapsed="0.000000"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.455654" elapsed="0.218254"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.454787" elapsed="0.219121"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.673908" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.453653" elapsed="0.221311"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>@{args}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.676745" elapsed="0.044140"/>
+</kw>
+<msg time="2026-02-22T18:09:11.721883" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.675888" elapsed="0.045995"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.723906" level="INFO">Succès à la tentative 1 pour : Wait Until Element Is Visible ["xpath=//input[@id='login-button']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.721883" elapsed="0.002023"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:09:11.723906" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.675888" elapsed="0.048997"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.724885" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.724885" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.725884" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:09:11.724885" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.675888" elapsed="0.049996"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.674964" elapsed="0.050920"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.674964" elapsed="0.050920"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.726885" elapsed="0.000000"/>
+</kw>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${Btn_Login}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.450652" elapsed="0.276233"/>
+</kw>
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.728884" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.728884" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.729883" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.729883" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.748930" level="INFO">${compte1} = 43</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.732654" elapsed="0.016276"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:09:11.950411" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.748930" elapsed="0.201481"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.977591" level="INFO">${compte2} = 43</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.950411" elapsed="0.027180"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:09:11.978573" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.977591" elapsed="0.000982"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.977591" elapsed="0.000982"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.731884" elapsed="0.246689"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.731064" elapsed="0.248572"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:11.979636" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.731064" elapsed="0.248572"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:11.985832" level="INFO">Clicking button 'xpath=//input[@id='login-button']'.</msg>
+<arg>@{args}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.981648" elapsed="0.116982"/>
+</kw>
+<msg time="2026-02-22T18:09:12.098630" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.981648" elapsed="0.116982"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:09:12.101629" level="INFO">Succès à la tentative 1 pour : Click Button ["xpath=//input[@id='login-button']"]</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.099687" elapsed="0.001942"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:09:12.101833" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:11.981472" elapsed="0.120361"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.102629" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.102900" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.102900" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:09:12.101833" elapsed="0.001067"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:11.981472" elapsed="0.122158"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:09:11.980654" elapsed="0.122976"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:11.979636" elapsed="0.123994"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.103630" elapsed="0.000578"/>
+</kw>
+<arg>Click Button</arg>
+<arg>${Btn_Login}</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:09:11.727910" elapsed="0.376298"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:09:11.448653" elapsed="0.655977"/>
+</kw>
+<kw name="Strong" owner="base_page">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:12.106634" level="INFO">${tentatives_max} = 15</msg>
+<var>${tentatives_max}</var>
+<arg>15</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.105722" elapsed="0.000912"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-22T18:09:12.107628" level="INFO">${attente} = 0.1s</msg>
+<var>${attente}</var>
+<arg>0.1s</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.106634" elapsed="0.000994"/>
+</kw>
+<kw name="Attendre Que Le DOM Soit Stable" owner="base_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:12.120721" level="INFO">${compte1} = 52</msg>
+<var>${compte1}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.109629" elapsed="0.011092"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-22T18:09:12.321887" level="INFO">Slept 200 milliseconds.</msg>
+<arg>${intervalle}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.120721" elapsed="0.201166"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:12.327976" level="INFO">${compte2} = 52</msg>
+<var>${compte2}</var>
+<arg>${locator_racine}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.321887" elapsed="0.006997"/>
+</kw>
+<if>
+<branch type="IF" condition="${compte1} == ${compte2}">
+<return>
+<status status="PASS" start="2026-02-22T18:09:12.328884" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:12.328884" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:12.328884" elapsed="0.000999"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-02-22T18:09:12.108628" elapsed="0.221255"/>
+</iter>
+<var>${i}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:12.108628" elapsed="0.221255"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>ERREUR: Le nombre d'éléments dans le DOM ne s'est pas stabilisé après ${tentatives_max} tentatives.</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.329883" elapsed="0.000000"/>
+</kw>
+<doc>Attend que le nombre total d'éléments dans le DOM ne change plus
+entre deux intervalles, indiquant une stabilité structurelle.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.107628" elapsed="0.222255"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Page Should Not Contain" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:12.342886" level="INFO">Current page does not contain text 'Produits'.</msg>
+<arg>@{args}</arg>
+<doc>Verifies the current page does not contain ``text``.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.330883" elapsed="0.012003"/>
+</kw>
+<msg time="2026-02-22T18:09:12.342886" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${mot_cle}</arg>
+<arg>@{args}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.330883" elapsed="0.012003"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-22T18:09:12.343882" level="INFO">Succès à la tentative 1 pour : Page Should Not Contain ['Produits']</msg>
+<arg>Succès à la tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.342886" elapsed="0.000996"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-02-22T18:09:12.343882" elapsed="0.000000"/>
+</return>
+<status status="PASS" start="2026-02-22T18:09:12.330883" elapsed="0.013997"/>
+</branch>
+<branch type="EXCEPT" assign="${err}">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Échec tentative ${index + 1} pour : ${mot_cle} ${args}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.344880" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message d'exception : ${err}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.344880" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${attente}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.344880" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-22T18:09:12.344880" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-02-22T18:09:12.330883" elapsed="0.013997"/>
+</try>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-02-22T18:09:12.330883" elapsed="0.013997"/>
+</iter>
+<var>${index}</var>
+<value>${tentatives_max}</value>
+<status status="PASS" start="2026-02-22T18:09:12.329883" elapsed="0.014997"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Échec après ${tentatives_max} tentatives du mot-clé : ${mot_cle} ${args}. Dernière erreur: ${err}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-22T18:09:12.345880" elapsed="0.000000"/>
+</kw>
+<arg>Page Should Not Contain</arg>
+<arg>Produits</arg>
+<doc>Exécute un mot-clé avec rerejeu automatique en cas d'exception dans la limite d'un nombre de fois en paramètre ci-dessous.
+Utile pour gérer les erreurs comme StaleElementReferenceException ou autres erreurs intermittentes.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.105722" elapsed="0.240158"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-22T18:09:12.389883" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.345880" elapsed="0.044003"/>
+</kw>
+<kw name="Fermer tout les navigateurs" owner="base_page" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-02-22T18:09:12.391885" elapsed="3.826273"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:09:12.390883" elapsed="3.827275"/>
+</kw>
+<doc>ce cas de test permet de vérifier qu'on ne peut pas se connecter au site par
+un username et mot de passe invalides</doc>
+<tag>login</tag>
+<status status="PASS" start="2026-02-22T18:09:00.192962" elapsed="16.026309"/>
+</test>
+<status status="PASS" start="2026-02-22T18:08:44.376797" elapsed="31.845776"/>
+</suite>
+<status status="PASS" start="2026-02-22T18:08:44.328450" elapsed="31.897622"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="2" fail="0" skip="0">login</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="2" fail="0" skip="0">Tests</stat>
+<stat name="Login test" id="s1-s1" pass="2" fail="0" skip="0">Tests.Login test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

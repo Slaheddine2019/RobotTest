@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.1 on win32)" generated="2026-02-22T18:01:56.238708" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\DELL\Desktop\rob1\tests">
+<suite id="s1-s1" name="Login test" source="C:\Users\DELL\Desktop\rob1\tests\Login_test.robot">
+<test id="s1-s1-t1" name="Login avec valid cridentiels" line="18">
+<kw name="Se connecter au site" type="SETUP">
+<msg time="2026-02-22T18:01:56.747804" level="FAIL">No keyword with name 'Se connecter au site' found.</msg>
+<status status="FAIL" start="2026-02-22T18:01:56.747804" elapsed="0.000000">No keyword with name 'Se connecter au site' found.</status>
+</kw>
+<kw name="Fermer tout les navigateurs" owner="base_page" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-02-22T18:01:56.747804" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:01:56.747804" elapsed="0.000000"/>
+</kw>
+<doc>ce cas de test permet de se connecter au site avec
+un username et mot de passe valides</doc>
+<tag>login</tag>
+<status status="FAIL" start="2026-02-22T18:01:56.744432" elapsed="0.003372">Setup failed:
+No keyword with name 'Se connecter au site' found.</status>
+</test>
+<test id="s1-s1-t2" name=" Login avec invalid cridentiels" line="30">
+<kw name="Se connecter au site" type="SETUP">
+<msg time="2026-02-22T18:01:56.765490" level="FAIL">No keyword with name 'Se connecter au site' found.</msg>
+<status status="FAIL" start="2026-02-22T18:01:56.765490" elapsed="0.000000">No keyword with name 'Se connecter au site' found.</status>
+</kw>
+<kw name="Fermer tout les navigateurs" owner="base_page" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-02-22T18:01:56.772544" elapsed="0.000870"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:01:56.772371" elapsed="0.001043"/>
+</kw>
+<doc>ce cas de test permet de vérifier qu'on ne peut pas se connecter au site par
+un username et mot de passe invalides</doc>
+<tag>login</tag>
+<status status="FAIL" start="2026-02-22T18:01:56.759792" elapsed="0.013622">Setup failed:
+No keyword with name 'Se connecter au site' found.</status>
+</test>
+<status status="FAIL" start="2026-02-22T18:01:56.293556" elapsed="0.481887"/>
+</suite>
+<status status="FAIL" start="2026-02-22T18:01:56.251462" elapsed="0.526104"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="2" skip="0">login</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="2" skip="0">Tests</stat>
+<stat name="Login test" id="s1-s1" pass="0" fail="2" skip="0">Tests.Login test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

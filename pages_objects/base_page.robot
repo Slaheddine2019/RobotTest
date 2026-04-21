@@ -7,12 +7,20 @@ Resource    ../variables/variables_globales.robot
 
 
 *** Keywords ***
-Se connecter au site 
-    [Documentation]    Ouvre Amazon dans Chrome, Firefox ou Edge
+Se connecter au site
+    [Documentation]    Ouvre le site avec navigateur compatible CI
 
-    Run Keyword If    '${BROWSER}' == 'chrome'    Open Browser    ${BASE_URL}    chrome
-    ...    ELSE IF    '${BROWSER}' == 'firefox'    Open Browser    ${BASE_URL}    firefox
-    ...    ELSE IF    '${BROWSER}' == 'edge'    Open Browser    ${BASE_URL}    edge
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+
+    Run Keyword If    '${BROWSER}' == 'chrome'
+    ...    Open Browser    ${BASE_URL}    chrome    options=${options}
+    ...    ELSE IF    '${BROWSER}' == 'firefox'
+    ...    Open Browser    ${BASE_URL}    firefox
+    ...    ELSE IF    '${BROWSER}' == 'edge'
+    ...    Open Browser    ${BASE_URL}    edge
     ...    ELSE    Fail    Navigateur non supporté : ${BROWSER}
 
     Maximize Browser Window

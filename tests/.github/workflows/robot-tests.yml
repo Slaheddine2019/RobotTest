@@ -1,0 +1,51 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupère ton code depuis GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Installer Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # 3. Installer Robot Framework + Selenium
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
+          pip install webdriver-manager
+
+      # 4. Installer Google Chrome (pour Selenium)
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      # 5. Lancer les tests Robot Framework
+      - name: Run tests
+        run: |
+          robot tests/
+
+      # 6. Sauvegarder les rapports
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-reports
+          path: |
+            output.xml
+            report.html
+            log.html

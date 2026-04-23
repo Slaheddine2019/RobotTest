@@ -23,18 +23,20 @@ jobs:
           pip install --upgrade pip
           pip install robotframework
           pip install robotframework-seleniumlibrary
-          pip install webdriver-manager
 
-      - name: Install Chrome + dependencies
+      - name: Install Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install ChromeDriver
+        run: |
+          sudo apt-get install -y chromium-chromedriver
+          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
       - name: Run tests (headless)
         run: |
-          robot --outputdir results tests/
+          robot -d results tests/
 
       - name: Upload reports
         if: always()

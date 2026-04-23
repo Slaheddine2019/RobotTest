@@ -1,4 +1,4 @@
-name: Robot Framework Tests
+name: Robot Framework Tests (Multi-Browser)
 
 on:
   push:
@@ -9,6 +9,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,29 +22,55 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           pip install --upgrade pip
           pip install robotframework
           pip install robotframework-seleniumlibrary
 
+      # =========================
+      # CHROME SETUP
+      # =========================
       - name: Install Chrome
+        if: matrix.browser == 'chrome'
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
       - name: Install ChromeDriver
+        if: matrix.browser == 'chrome'
         run: |
           sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
-      - name: Run tests (headless)
+      # =========================
+      # FIREFOX SETUP
+      # =========================
+      - name: Install Firefox
+        if: matrix.browser == 'firefox'
         run: |
-          robot -d results tests/
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
+      - name: Install GeckoDriver
+        if: matrix.browser == 'firefox'
+        run: |
+          sudo apt-get install -y firefox-geckodriver
+
+      # =========================
+      # RUN TESTS
+      # =========================
+      - name: Run Robot Framework tests
+        env:
+          BROWSER: ${{ matrix.browser }}
+        run: |
+          robot -d results -v BROWSER:$BROWSER tests/
+
+      # =========================
+      # REPORTS
+      # =========================
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: robot-reports
+          name: robot-reports-${{ matrix.browser }}
           path: results/

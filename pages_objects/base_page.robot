@@ -15,19 +15,18 @@ Se connecter au site
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
 
-    Run Keyword If    '${BROWSER}' == 'chrome'
-    ...    Open Browser    ${BASE_URL}    chrome    options=${options}
-    ...    ELSE IF    '${BROWSER}' == 'firefox'
-    ...    Open Browser    ${BASE_URL}    firefox
-    ...    ELSE IF    '${BROWSER}' == 'edge'
-    ...    Open Browser    ${BASE_URL}    edge
-    ...    ELSE    Fail    Navigateur non supporté : ${BROWSER}
+    IF    '${BROWSER}' == 'chrome'
+        Open Browser    ${BASE_URL}    chrome    options=${options}
+    ELSE IF    '${BROWSER}' == 'firefox'
+        Open Browser    ${BASE_URL}    firefox
+    ELSE IF    '${BROWSER}' == 'edge'
+        Open Browser    ${BASE_URL}    edge
+    ELSE
+        Fail    Navigateur non supporté : ${BROWSER}
+    END
 
     Maximize Browser Window
     Set Selenium Timeout    ${SELENIUM_TIMEOUT}
-# Fermer le navigateur
-Fermer tout les navigateurs
-    Close All Browsers
 
 Strong
      [Arguments]     ${mot_cle}    @{args}

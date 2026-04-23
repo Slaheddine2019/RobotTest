@@ -30,13 +30,13 @@ Login avec valid cridentiels
  Login avec invalid cridentiels 
 
    [Documentation]    ce cas de test permet de vérifier qu'on ne peut pas se connecter au site par
-    ...  un username et mot de passe invalides 
+    ...  un username et mot de passe invalides test
     [Tags]    login
     [Setup]    Se connecter au site    
     [Teardown]    Fermer tout les navigateurs 
    Saisir username    ${Invalid_Username} 
    Saisir mode de passe    ${Invalid_Password}
    Cliquer sur le bouton Login
-   Strong     Page Should Not Contain    Produits
+   Page Should Not Contain    Produits
    Capture Page Screenshot
     

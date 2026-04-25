@@ -17,7 +17,9 @@ Se connecter au site
         ${options}=    Evaluate    __import__('selenium.webdriver').webdriver.FirefoxOptions()
         Call Method    ${options}    add_argument    --headless
 
-        Open Browser    ${BASE_URL}    firefox
+        ${service}=    Evaluate    __import__('selenium.webdriver').FirefoxService()
+
+    Open Browser    ${BASE_URL}    firefox    options=${options}    service=${service}
     ELSE
         Fail    Navigateur non supporté : ${BROWSER}
     END

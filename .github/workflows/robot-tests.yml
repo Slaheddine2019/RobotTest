@@ -43,7 +43,7 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       # =========================
-      # FIREFOX (FIXED)
+      # FIREFOX (SIMPLIFIÉ + STABLE)
       # =========================
       - name: Install Firefox
         if: matrix.browser == 'firefox'
@@ -51,10 +51,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y firefox
 
-      - name: Install Geckodriver (manual stable)
+      - name: Install Geckodriver (stable)
         if: matrix.browser == 'firefox'
         run: |
-          GECKO_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
+          GECKO_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep '"tag_name"' | head -n 1 | cut -d '"' -f 4)
+
+          echo "Geckodriver version: $GECKO_VERSION"
 
           wget https://github.com/mozilla/geckodriver/releases/download/${GECKO_VERSION}/geckodriver-${GECKO_VERSION}-linux64.tar.gz
           tar -xzf geckodriver-*-linux64.tar.gz

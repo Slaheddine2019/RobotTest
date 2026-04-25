@@ -1,34 +1,31 @@
 *** Settings ***
 Library    SeleniumLibrary
 
-Resource    ../variables/variables_globales.robot   
+Resource    ../variables/variables_globales.robot
 Resource    ../pages_objects/base_page.robot
+
 *** Variables ***
-
-
-${BTN_BONJOUR_IDENTIFIEZ_VOUS}    xpath=//span[@class='nav-action-inner']
-${Btn_aacept_popup_page_acceuil}    xpath=//input[@id='sp-cc-accept']
-${Username_Field}     xpath=//input[@id='user-name'] 
-${Passeword_Field}    xpath=//input[@id='password']
-${Btn_Login}    xpath=//input[@id='login-button']
-
+${Username_Field}     xpath=//input[@id='user-name']
+${Password_Field}     xpath=//input[@id='password']
+${Btn_Login}          xpath=//input[@id='login-button']
+${Title_Produits}     xpath=//span[@class='title' and contains(text(),'Products')]
 
 *** Keywords ***
 
-Saisir username 
+Saisir username
     [Arguments]    ${username}
-    Strong    Wait Until Element Is Visible    ${Username_Field}
-    Input Text    ${Username_Field}     ${username}
-Saisir mode de passe
-      [Arguments]    ${passeword}
-    Strong    Wait Until Element Is Visible    ${Passeword_Field}
-    Input Text    ${Passeword_Field}     ${passeword}
+    Wait Until Element Is Visible    ${Username_Field}    timeout=10s
+    Input Text    ${Username_Field}    ${username}
+
+saisir password
+    [Arguments]    ${password}
+    Wait Until Element Is Visible    ${Password_Field}    timeout=10s
+    Input Text    ${Password_Field}    ${password}
+
 Cliquer sur le bouton Login
-    Strong    Wait Until Element Is Visible    ${Btn_Login}
-    Strong    Click Button    ${Btn_Login}
+    Wait Until Element Is Visible    ${Btn_Login}    timeout=10s
+    Click Button    ${Btn_Login}
 
-
-verifier l'affichage de titre Produits
-
-    Strong    Page Should Contain    Swag Labs
-
+Verifier affichage page Produits
+    Wait Until Element Is Visible    ${Title_Produits}    timeout=10s
+    Element Should Contain    ${Title_Produits}    Products

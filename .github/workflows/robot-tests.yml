@@ -10,46 +10,52 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false
       matrix:
         browser: [chrome, firefox]
 
     steps:
+      # =========================
       # CHECKOUT
+      # =========================
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # PYTHON
+      # =========================
+      # PYTHON SETUP
+      # =========================
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
-          pip install robotframework robotframework-seleniumlibrary
+          python -m pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
 
       # =========================
-      # CHROME (FIABLE)
+      # CHROME SETUP
       # =========================
-      - name: Setup Chrome
+      - name: Install Chrome
         if: matrix.browser == 'chrome'
-        uses: browser-actions/setup-chrome@v1
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y chromium-driver
 
       # =========================
-      # FIREFOX (FIABLE)
+      # FIREFOX SETUP
       # =========================
-      - name: Setup Firefox
+      - name: Install Firefox
         if: matrix.browser == 'firefox'
-        uses: browser-actions/setup-firefox@v1
-
-      - name: Setup Geckodriver
-        if: matrix.browser == 'firefox'
-        uses: browser-actions/setup-geckodriver@v1
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
+          sudo apt-get install -y geckodriver
 
       # =========================
-      # TESTS
+      # RUN TESTS
       # =========================
       - name: Run Robot Framework tests
         env:

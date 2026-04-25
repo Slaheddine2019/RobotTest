@@ -1,42 +1,39 @@
 *** Settings ***
 Library    SeleniumLibrary
-
 Resource    ../pages_objects/login_page.robot
 
 *** Variables ***
-
-${Valid_Username}    standard_user
-${Valid_Password}  secret_sauce
+${Valid_Username}      standard_user
+${Valid_Password}      secret_sauce
 ${Invalid_Username}    12
-${Invalid_Password}  244
-
-
+${Invalid_Password}    244
 
 *** Test Cases ***
 
-
-Login avec valid cridentiels
-    [Documentation]    ce cas de test permet de se connecter au site avec
-    ...  un username et mot de passe valides
+Login avec valid credentials
+    [Documentation]    Connexion avec identifiants valides
     [Tags]    login
-    [Setup]    Se connecter au site   
-    [Teardown]    Fermer tout les navigateurs 
-   Saisir username    ${Valid_Username} 
-   Saisir mode de passe    ${Valid_Password}
-   Cliquer sur le bouton Login
-   verifier l'affichage de titre Produits
-   Capture Page Screenshot
+    [Setup]    Se connecter au site
+    [Teardown]    Close All Browsers
 
- Login avec invalid cridentiels 
+    Saisir username    ${Valid_Username}
+    saisir password   ${Valid_Password}
+    Cliquer sur le bouton Login
+    Verifier affichage page Produits
+    Capture Page Screenshot
 
-   [Documentation]    ce cas de test permet de vérifier qu'on ne peut pas se connecter au site par
-    ...  un username et mot de passe invalides test
+
+Login avec invalid credentials
+    [Documentation]    Vérifie qu’un login invalide échoue
     [Tags]    login
-    [Setup]    Se connecter au site    
-    [Teardown]    Fermer tout les navigateurs 
-   Saisir username    ${Invalid_Username} 
-   Saisir mode de passe    ${Invalid_Password}
-   Cliquer sur le bouton Login
-   Page Should Not Contain    Produits
-   Capture Page Screenshot
-    
+    [Setup]    Se connecter au site
+    [Teardown]    Close All Browsers
+
+    Saisir username    ${Invalid_Username}
+    saisir password   ${Invalid_Password}
+    Cliquer sur le bouton Login
+
+    # Vérification plus fiable
+    Page Should Contain Element    xpath=//h3[contains(text(),'Epic sadface')]
+
+    Capture Page Screenshot

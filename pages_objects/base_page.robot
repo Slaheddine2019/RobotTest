@@ -14,10 +14,10 @@ Se connecter au site
         Open Browser    ${BASE_URL}    chrome    options=${options}
 
     ELSE IF    '${BROWSER}' == 'firefox'
-        ${options}=    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys, selenium.webdriver
+        ${options}=    Evaluate    __import__('selenium.webdriver').webdriver.FirefoxOptions()
         Call Method    ${options}    add_argument    --headless
-        Open Browser    ${BASE_URL}    firefox    options=${options}
 
+        Open Browser    ${BASE_URL}    firefox
     ELSE
         Fail    Navigateur non supporté : ${BROWSER}
     END

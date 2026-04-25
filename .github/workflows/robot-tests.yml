@@ -2,7 +2,7 @@ name: Robot Framework Tests (Multi-Browser)
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
 
 jobs:
@@ -14,9 +14,15 @@ jobs:
         browser: [chrome, firefox]
 
     steps:
+      # =========================
+      # CHECKOUT
+      # =========================
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # =========================
+      # PYTHON SETUP
+      # =========================
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -24,7 +30,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install robotframework
           pip install robotframework-seleniumlibrary
 
@@ -36,11 +42,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-
-      - name: Install ChromeDriver
-        if: matrix.browser == 'chrome'
-        run: |
-          sudo apt-get install -y chromium-chromedriver
+          sudo apt-get install -y chromium-driver
 
       # =========================
       # FIREFOX SETUP
@@ -50,11 +52,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y firefox
-
-      - name: Install GeckoDriver
-        if: matrix.browser == 'firefox'
-        run: |
-          sudo apt-get install -y firefox-geckodriver
+          sudo apt-get install -y geckodriver
 
       # =========================
       # RUN TESTS
@@ -62,7 +60,6 @@ jobs:
       - name: Run Robot Framework tests
         env:
           BROWSER: ${{ matrix.browser }}
-          FORCE_JAVASCRIPT_ACTIONS_TO_NODE2: true
         run: |
           robot -d results -v BROWSER:$BROWSER tests/
 

@@ -62,6 +62,7 @@ jobs:
       - name: Run Robot Framework tests
         env:
           BROWSER: ${{ matrix.browser }}
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         run: |
           robot -d results -v BROWSER:$BROWSER tests/
 
